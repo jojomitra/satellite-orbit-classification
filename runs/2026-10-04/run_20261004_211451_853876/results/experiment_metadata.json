@@ -1,0 +1,156 @@
+{
+    "run_id": "20261004_211451_853876",
+    "run_date_uae": "2026-10-04",
+    "run_directory_google_drive": "/content/drive/MyDrive/CelesTrak_Active_Satellites/runs/2026-10-04/run_20261004_211451_853876",
+    "run_directory_github": "runs/2026-10-04/run_20261004_211451_853876",
+    "dataset": "CelesTrak Active Satellites GP CSV",
+    "source_url": "https://celestrak.org/NORAD/elements/gp.php?GROUP=ACTIVE&FORMAT=CSV",
+    "daily_snapshot_file": "active_satellites_2026-10-04.csv",
+    "daily_snapshot_path_google_drive": "/content/drive/MyDrive/CelesTrak_Active_Satellites/active_satellites_2026-10-04.csv",
+    "github_dataset_path": "datasets/active_satellites_2026-10-04.csv",
+    "data_sha256": "c671f57164705a63c529d3e7caaea341c5e108bfa7759d84eee9fb88bb040cfe",
+    "rows_used": 16633,
+    "columns_in_source_file": 17,
+    "latest_epoch_in_dataset": "2026-10-04T19:13:46.581312+00:00",
+    "random_state": 42,
+    "train_fraction": 0.7,
+    "validation_fraction": 0.15,
+    "test_fraction": 0.15,
+    "primary_metric": "Macro-F1",
+    "models": [
+        "Dummy Baseline",
+        "Logistic Regression",
+        "Random Forest",
+        "HistGradientBoosting",
+        "Extra Trees",
+        "RBF SVM",
+        "K-Nearest Neighbors"
+    ],
+    "features": [
+        "RA_OF_ASC_NODE",
+        "ARG_OF_PERICENTER",
+        "MEAN_ANOMALY",
+        "BSTAR",
+        "MEAN_MOTION_DOT",
+        "MEAN_MOTION_DDOT"
+    ],
+    "excluded_target_defining_columns": [
+        "MEAN_MOTION",
+        "ECCENTRICITY",
+        "INCLINATION"
+    ],
+    "excluded_derived_columns": [
+        "SEMI_MAJOR_AXIS_KM",
+        "PERIGEE_RADIUS_KM",
+        "APOGEE_RADIUS_KM",
+        "PERIGEE_ALT_KM",
+        "APOGEE_ALT_KM",
+        "ORBITAL_PERIOD_MIN",
+        "ORBITAL_PERIOD_HOURS"
+    ],
+    "excluded_identifier_columns": [
+        "OBJECT_NAME",
+        "OBJECT_ID",
+        "NORAD_CAT_ID",
+        "EPOCH",
+        "ELEMENT_SET_NO",
+        "REV_AT_EPOCH",
+        "EPHEMERIS_TYPE",
+        "CLASSIFICATION_TYPE"
+    ],
+    "target": "ORBIT_CLASS",
+    "orbit_classes": [
+        "LEO",
+        "MEO",
+        "GEO",
+        "HEO"
+    ],
+    "orbit_definitions": {
+        "LEO": "Broad assignment class based on the ESA LEO regime: perigee and apogee within approximately 0\u20132000 km.",
+        "MEO": "Broad assignment class containing ESA MEO, NSO and LMO regimes, representing orbital regimes extending through the medium-Earth altitude range.",
+        "GEO": "ESA GEO regime: inclination <= 25 degrees and both perigee and apogee within approximately 35586\u201335986 km.",
+        "HEO": "Assignment-level high-Earth umbrella containing ESA GTO, MGO, IGO, EGO, GHO, HEO and HAO regimes. This is intentionally broader than ESA's specific HEO (Highly Eccentric Earth Orbit) category."
+    },
+    "four_class_distribution": {
+        "LEO": {
+            "count": 15819,
+            "percentage": 95.1061
+        },
+        "MEO": {
+            "count": 187,
+            "percentage": 1.1243
+        },
+        "GEO": {
+            "count": 532,
+            "percentage": 3.1985
+        },
+        "HEO": {
+            "count": 95,
+            "percentage": 0.5712
+        }
+    },
+    "esa_orbit_taxonomy": {
+        "source": "ESA Annual Space Environment Report, Table 1.2",
+        "description": "ESA provides a detailed orbital-regime taxonomy using semi-major axis, eccentricity, inclination, perigee height and apogee height.",
+        "detailed_regime_counts": {
+            "LEO": 15819,
+            "GEO": 532,
+            "NSO": 137,
+            "MEO": 43,
+            "EGO": 35,
+            "HEO": 22,
+            "IGO": 21,
+            "GTO": 10,
+            "LMO": 7,
+            "MGO": 6,
+            "HAO": 1
+        },
+        "regimes": [
+            "LEO",
+            "LMO",
+            "MEO",
+            "NSO",
+            "GEO",
+            "GTO",
+            "MGO",
+            "IGO",
+            "EGO",
+            "GHO",
+            "HEO",
+            "HAO"
+        ]
+    },
+    "esa_to_four_class_mapping": {
+        "LEO": "LEO",
+        "LMO": "MEO",
+        "MEO": "MEO",
+        "NSO": "MEO",
+        "GEO": "GEO",
+        "GTO": "HEO",
+        "MGO": "HEO",
+        "IGO": "HEO",
+        "EGO": "HEO",
+        "GHO": "HEO",
+        "HEO": "HEO",
+        "HAO": "HEO"
+    },
+    "ablation": {
+        "description": "Remove BSTAR from the ML feature set.",
+        "full_features": [
+            "RA_OF_ASC_NODE",
+            "ARG_OF_PERICENTER",
+            "MEAN_ANOMALY",
+            "BSTAR",
+            "MEAN_MOTION_DOT",
+            "MEAN_MOTION_DDOT"
+        ],
+        "ablated_features": [
+            "RA_OF_ASC_NODE",
+            "ARG_OF_PERICENTER",
+            "MEAN_ANOMALY",
+            "MEAN_MOTION_DOT",
+            "MEAN_MOTION_DDOT"
+        ]
+    },
+    "leakage_prevention_note": "MEAN_MOTION, ECCENTRICITY and INCLINATION were used to construct the physics-based orbit-class labels and were therefore excluded from the ML predictor set. Quantities directly derived from these variables, including semi-major axis, perigee, apogee and orbital period, were also excluded from model inputs."
+}
