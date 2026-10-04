@@ -1,0 +1,71 @@
+{
+    "run_id": "20261004_161210_685295",
+    "run_date_uae": "2026-10-04",
+    "run_directory_google_drive": "/content/drive/MyDrive/CelesTrak_Active_Satellites/runs/2026-10-04/run_20261004_161210_685295",
+    "run_directory_github": "runs/2026-10-04/run_20261004_161210_685295",
+    "dataset": "CelesTrak Active Satellites GP CSV",
+    "source_url": "https://celestrak.org/NORAD/elements/gp.php?GROUP=ACTIVE&FORMAT=CSV",
+    "daily_snapshot_file": "active_satellites_2026-10-04.csv",
+    "daily_snapshot_path_google_drive": "/content/drive/MyDrive/CelesTrak_Active_Satellites/active_satellites_2026-10-04.csv",
+    "dataset_status": "TODAYS_CELESTRAK_DATASET_USED",
+    "data_sha256": "c671f57164705a63c529d3e7caaea341c5e108bfa7759d84eee9fb88bb040cfe",
+    "rows_used": 16633,
+    "columns_in_source_file": 17,
+    "latest_epoch_in_dataset": "2026-10-04T19:13:46.581312+00:00",
+    "random_state": 42,
+    "train_fraction": 0.7,
+    "validation_fraction": 0.15,
+    "test_fraction": 0.15,
+    "primary_metric": "Macro-F1",
+    "models": [
+        "Dummy Baseline",
+        "Logistic Regression",
+        "Random Forest",
+        "HistGradientBoosting"
+    ],
+    "features": [
+        "RA_OF_ASC_NODE",
+        "ARG_OF_PERICENTER",
+        "MEAN_ANOMALY",
+        "BSTAR",
+        "MEAN_MOTION_DOT",
+        "MEAN_MOTION_DDOT"
+    ],
+    "excluded_target_defining_columns": [
+        "MEAN_MOTION",
+        "ECCENTRICITY",
+        "INCLINATION"
+    ],
+    "excluded_derived_columns": [
+        "SEMI_MAJOR_AXIS_KM",
+        "PERIGEE_RADIUS_KM",
+        "APOGEE_RADIUS_KM",
+        "PERIGEE_ALT_KM",
+        "APOGEE_ALT_KM",
+        "ORBITAL_PERIOD_MIN",
+        "ORBITAL_PERIOD_HOURS"
+    ],
+    "excluded_identifier_columns": [
+        "OBJECT_NAME",
+        "OBJECT_ID",
+        "NORAD_CAT_ID",
+        "EPOCH",
+        "ELEMENT_SET_NO",
+        "REV_AT_EPOCH",
+        "EPHEMERIS_TYPE",
+        "CLASSIFICATION_TYPE"
+    ],
+    "orbit_classes": [
+        "LEO",
+        "MEO",
+        "GEO",
+        "HEO"
+    ],
+    "orbit_definition": {
+        "LEO": "Apogee altitude < 2000 km",
+        "GEO": "Period within 0.25 hours of one sidereal day, eccentricity <= 0.01, inclination <= 5 degrees",
+        "HEO": "Apogee altitude > 35786 km and not GEO",
+        "MEO": "Remaining orbital class"
+    },
+    "ablation": "Remove BSTAR"
+}
